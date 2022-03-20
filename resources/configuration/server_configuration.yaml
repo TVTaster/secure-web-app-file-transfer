@@ -1,0 +1,13 @@
+# Port Server Configuration
+
+#ServerHost: 0.0.0.0
+#ServerPort: 8000
+LocalDirectoryBaseStorage: "resources"
+
+# Authentication Configuration
+
+ReceiverUsername: tarazan
+ReceiverPassword: 1q2w3e4r
+SenderUsername: jane
+SenderPassword: q1w2e3r4
+

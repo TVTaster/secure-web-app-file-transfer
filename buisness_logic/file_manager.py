@@ -5,15 +5,19 @@ from uuid import uuid4
 import aiofiles
 from fastapi import HTTPException, UploadFile
 
+from configuration.constants import local_directory_base_storage
+from configuration.yaml_config import Configuration
 from model.input.file_index import FileIndex
 
+configuration = Configuration.read()
 
 
 class FileManager:
+    base_storage: str = configuration[local_directory_base_storage]
 
     @staticmethod
     def retrieve_file(index: FileIndex) -> str:
-        file_path = PurePath("resources").joinpath(str(index.index))
+        file_path = PurePath(FileManager.base_storage).joinpath(str(index.index))
 
         if not Path.exists(Path(file_path)):
             raise HTTPException(status_code=404, detail="The requested file not found")
@@ -25,13 +29,13 @@ class FileManager:
     @staticmethod
     async def save_file(file: UploadFile) -> int:
         new_index = int(str(uuid4().int)[:6])
-        file_path = PurePath("resources").joinpath(str(new_index))
+        file_path = PurePath(FileManager.base_storage).joinpath(str(new_index))
 
         # In any case the new hashed 6 digit already benn used
         # keep searching until find brand new un unused index
         while Path.exists(Path(file_path)):
             new_index = int(str(uuid4().int)[:6])
-            file_path = PurePath("resources").joinpath(str(new_index))
+            file_path = PurePath(FileManager.base_storage).joinpath(str(new_index))
 
         Path.mkdir(Path(file_path))
 

@@ -4,8 +4,11 @@ from fastapi import HTTPException
 from fastapi.security import HTTPBasicCredentials
 from starlette.status import HTTP_401_UNAUTHORIZED
 
+from configuration.constants import receiver_username, receiver_password, sender_username, sender_password
+from configuration.yaml_config import Configuration
 from model.authentication.user import UserType
 
+configuration = Configuration.read()
 
 
 class UserManager:
@@ -21,11 +24,11 @@ class UserManager:
 
 def valid_credentials(credentials: HTTPBasicCredentials, user_type: UserType) -> None:
     if user_type == UserType.RECEIVER:
-        username = "tarazan"
-        password = "1q2w3e4r"
+        username = configuration[receiver_username]
+        password = configuration[receiver_password]
     else:
-        username = "jane"
-        password = "q1w2e3r4"
+        username = configuration[sender_username]
+        password = configuration[sender_password]
 
     # using secrets.compare_digest against "Timing Attacks"
     if not (secrets.compare_digest(credentials.username, username) and
