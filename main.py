@@ -1,11 +1,14 @@
 import uvicorn
 from fastapi import FastAPI, UploadFile, Depends
 from fastapi.security import HTTPBasicCredentials, HTTPBasic
-from starlette.responses import HTMLResponse
 
 from buisness_logic.file_manager import FileManager
 from buisness_logic.user_manager import UserManager
+from configuration.constants import server_host, server_port, server_reload
+from configuration.yaml_config import Configuration
 from model.input.file_index import FileIndex
+
+configuration = Configuration.read()
 
 app = FastAPI()
 security = HTTPBasic()
@@ -13,9 +16,7 @@ security = HTTPBasic()
 
 @app.get("/")
 async def root():
-    with open("html/index.html", "r") as html_file:
-        html = html_file.read()
-    return HTMLResponse(html)
+    return f"Please visit swagger at {configuration[server_host]}:{configuration[server_port]}/docs"
 
 
 @app.get("/api/v1/files/{index}")
@@ -38,4 +39,7 @@ async def health():
 
 
 if __name__ == '__main__':
-    uvicorn.run(app)
+    uvicorn.run("main:app",
+                host=configuration[server_host],
+                port=configuration[server_port],
+                reload=configuration[server_reload])

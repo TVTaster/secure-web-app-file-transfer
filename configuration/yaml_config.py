@@ -1,5 +1,3 @@
-import os
-
 from yaml import load, FullLoader
 
 
