@@ -9,7 +9,7 @@
 
 ### Installation
 - First, please install poetry at: https://python-poetry.org/docs/#installation
-- Second run command in current directory
+- Second, run command in current directory
 > poetry install 
 
 ### Running program
