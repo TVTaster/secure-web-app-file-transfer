@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "secure-web-app-file-transfer"
+version = "0.1.0"
+description = ""
+authors = ["shlomieyaniv <shlomieyaniv@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.75.0"
+uvicorn = "^0.17.6"
+PyYAML = "^6.0"
+aiofiles = "^0.8.0"
+python-multipart = "^0.0.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
