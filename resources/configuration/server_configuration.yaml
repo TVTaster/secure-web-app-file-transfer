@@ -1,7 +1,8 @@
 # Port Server Configuration
 
-#ServerHost: 0.0.0.0
-#ServerPort: 8000
+ServerHost: localhost
+ServerPort: 8000
+ServerReload: true
 LocalDirectoryBaseStorage: "resources"
 
 # Authentication Configuration
