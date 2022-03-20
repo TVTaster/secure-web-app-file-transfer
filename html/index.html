@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Porting be like</title>
+</head>
+
+<body style="overflow-x: hidden">
+
+<h1>The credentials</h1>
+
+<label for="username">Username:</label>
+<input id="username" name="username" type="text"><br><br>
+<label for="password">Password:</label>
+<input id="password" name="password" type="text"><br><br>
+
+<br>
+<br>
+
+<h2>File saving request</h2>
+
+<label for="file">Browse file:</label>
+<input id="file" name="file" type="file">
+<br>
+<br>
+<label for="result">result's file index:</label>
+<input id="result" name="result" type="text"><br><br>
+<button onclick="saveFile()"
+        type="button">
+    Click me to save file
+</button>
+
+<br>
+<br>
+
+<h2>File retrieving request</h2>
+
+<label for="file_index">Enter file index:</label>
+<input id="file_index" name="file_index" type="text"><br><br>
+<button onclick="fetchFile()"
+        type="button">
+    Click me to save file
+</button>
+
+<br>
+
+<p>Click the "Submit" button and the required request will be sent including the credentials.</p>
+
+<script>
+    function fetchFile() {
+        document.getElementById("demo").style.color = "red";
+    }
+</script>
+
+</body>
+</html>
