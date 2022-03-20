@@ -1,5 +1,6 @@
 import uvicorn
 from fastapi import FastAPI, UploadFile, Depends
+from fastapi.openapi.utils import get_openapi
 from fastapi.security import HTTPBasicCredentials, HTTPBasic
 
 from buisness_logic.file_manager import FileManager
@@ -12,6 +13,22 @@ configuration = Configuration.read()
 
 app = FastAPI()
 security = HTTPBasic()
+
+
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    openapi_schema = get_openapi(
+        title="Porting 4 life",
+        version="0.1.0",
+        description="This is a one of a kind web app secure file transfer",
+        routes=app.routes,
+    )
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+
+app.openapi = custom_openapi
 
 
 @app.get("/")
