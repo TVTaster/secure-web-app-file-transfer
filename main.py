@@ -1,6 +1,7 @@
 import uvicorn
 from fastapi import FastAPI, UploadFile, Depends
 from fastapi.openapi.utils import get_openapi
+from fastapi.responses import RedirectResponse
 from fastapi.security import HTTPBasicCredentials, HTTPBasic
 
 from buisness_logic.file_manager import FileManager
@@ -31,9 +32,9 @@ def custom_openapi():
 app.openapi = custom_openapi
 
 
-@app.get("/")
+@app.get("/", response_class=RedirectResponse)
 async def root():
-    return f"Please visit swagger at {configuration[server_host]}:{configuration[server_port]}/docs"
+    return f"http://{configuration[server_host]}:{configuration[server_port]}/docs"
 
 
 @app.get("/api/v1/files/{index}")
